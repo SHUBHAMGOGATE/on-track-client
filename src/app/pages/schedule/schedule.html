@@ -43,13 +43,16 @@
         </ion-label>
       </ion-item-divider>
 
-      <ion-item-sliding *ngFor="let session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase"
+      <!-- <ion-item-sliding *ngFor="let session of group.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase" -->
+      <ion-item-sliding *ngFor="let session of group.sessions" #slidingItem
         [hidden]="session.hide">
         <ion-item routerLink="/app/tabs/schedule/session/{{session.id}}">
           <ion-label>
             <h3>{{session.name}}</h3>
             <p>
-              {{session.timeStart}} &mdash; {{session.timeEnd}}: {{session.location}}
+              <!-- {{session.timeStart}} &mdash; {{session.timeEnd}}: {{session.location}} -->
+            {{session.timeStart}} &mdash; {{session.timeEnd}}
+
             </p>
           </ion-label>
         </ion-item>

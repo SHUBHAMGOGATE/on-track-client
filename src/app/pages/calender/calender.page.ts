@@ -2,6 +2,7 @@ import { CalendarComponent } from 'ionic2-calendar/calendar';
 import { Component, ViewChild, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
+import { AngularFirestore,AngularFirestoreCollection} from 'angularfire2/firestore';
 
 @Component({
   selector: 'calender',
@@ -37,7 +38,9 @@ export class CalenderPage implements OnInit {
  
   @ViewChild(CalendarComponent,{static:false}) myCal: CalendarComponent;
  
-  constructor(private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string) { }
+  event_collect : AngularFirestoreCollection;
+  constructor(private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string,
+              private db : AngularFirestore) {}
  
   ngOnInit() {
     this.resetEvent();
@@ -72,11 +75,13 @@ export class CalenderPage implements OnInit {
       eventCopy.startTime = new Date(Date.UTC(start.getUTCFullYear(), start.getUTCMonth(), start.getUTCDate()));
       eventCopy.endTime = new Date(Date.UTC(end.getUTCFullYear(), end.getUTCMonth(), end.getUTCDate() + 1));
     }
- 
+    
     this.eventSource.push(eventCopy);
     this.myCal.loadEvents();
     this.resetEvent();
-    console.log(eventCopy)
+    this.event_collect = this.db.collection('/Events/');
+    this.event_collect.add({'EventDetails':eventCopy});
+    console.log(eventCopy);
   }
   next() {
     var swiper = document.querySelector('.swiper-container')['swiper'];
@@ -125,4 +130,6 @@ export class CalenderPage implements OnInit {
     selected.setHours(selected.getHours() + 1);
     this.event.endTime = (selected.toISOString());
   }
+
+  
 }

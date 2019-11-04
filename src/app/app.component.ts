@@ -30,9 +30,9 @@ export class AppComponent implements OnInit {
       icon: 'contacts'
     },
     {
-      title: 'Calender',
-      url: '/app/tabs/calender',
-      icon: 'map'
+      title: 'Calendar',
+      url: '/app/tabs/calendar',
+      icon: 'calendar'
     },
     {
       title: 'About',
