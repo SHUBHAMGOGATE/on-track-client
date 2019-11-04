@@ -444,16 +444,17 @@
       "id":"1",
       "schedule": [
         {
-          "date": "2047-05-17",
+          "date": "2019-04-11",
           "groups": [
             {
               "time": "8:00 am",
               "sessions": [
                 {
-                  "name": "Breakfast",
-                  "timeStart": "8:00 am",
-                  "timeEnd": "9:00 am",
-                  "tracks": ["Food"],
+                  "name": "Cereals",
+                  "timeStart": "November 4,2019 at 8:00:00 AM UTC+5:30",
+                  "timeEnd": "November 4,2019 at 9:00:00 AM UTC+5:30",
+                  "tracks": ["Breakfast"],
+                  "description":"This allows the breakfast to encompass more proteins.",
                   "status":"remaining",
                   "id": "1"
                 }
@@ -463,13 +464,14 @@
               "time": "9:15 am",
               "sessions": [
                 {
-                  "name": "Getting Started with Ionic",
+                  "name": "",
                   "location": "Hall 2",
-                  "description": "Mobile devices and browsers are now advanced enough that developers can build native-quality mobile apps using open web technologies like HTML5, Javascript, and CSS. In this talk, we’ll provide background on why and how we created Ionic, the design decisions made as we integrated Ionic with Angular, and the performance considerations for mobile platforms that our team had to overcome. We’ll also review new and upcoming Ionic features, and talk about the hidden powers and benefits of combining mobile app development and Angular.",
-                  "speakerNames": ["Ted Turtle"],
-                  "timeStart": "9:30 am",
-                  "timeEnd": "9:45 am",
-                  "tracks": ["Ionic"],
+                  "description":"",
+                  "speakerNames": [],
+                  "timeStart": "November 4,2019 at 9:30:00 AM UTC+5:30",
+                  "timeEnd": "November 4,2019 at 10:00:00 AM UTC+5:30",
+                  "tracks": [],
+                  "status":"remaining",
                   "id": "2"
               }
             ]

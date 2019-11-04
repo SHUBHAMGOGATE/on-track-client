@@ -37,21 +37,21 @@ export class ConferenceData {
       // loop through each timeline group in the day
       day.groups.forEach((group: any) => {
         // loop through each session in the timeline group
-        // group.sessions.forEach((session: any) => {
-        //   session.speakers = [];
-        //   if (session.speakerNames) {
-        //     session.speakerNames.forEach((speakerName: any) => {
-        //       const speaker = this.data.speakers.find(
-        //         (s: any) => s.name === speakerName
-        //       );
-        //       if (speaker) {
-        //         session.speakers.push(speaker);
-        //         speaker.sessions = speaker.sessions || [];
-        //         speaker.sessions.push(session);
-        //       }
-        //     });
-        //   }
-        // });
+        group.sessions.forEach((session: any) => {
+          session.speakers = [];
+          if (session.speakerNames) {
+            session.speakerNames.forEach((speakerName: any) => {
+              const speaker = this.data.speakers.find(
+                (s: any) => s.name === speakerName
+              );
+              if (speaker) {
+                session.speakers.push(speaker);
+                speaker.sessions = speaker.sessions || [];
+                speaker.sessions.push(session);
+              }
+            });
+          }
+        });
       });
     });
 

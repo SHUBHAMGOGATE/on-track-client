@@ -51,7 +51,7 @@
             <h3>{{session.name}}</h3>
             <p>
               <!-- {{session.timeStart}} &mdash; {{session.timeEnd}}: {{session.location}} -->
-            {{session.timeStart}} &mdash; {{session.timeEnd}}
+            {{session.timeStart | slice :19:23}} &mdash; {{session.timeEnd | slice :19:23 }}
 
             </p>
           </ion-label>
