@@ -43,7 +43,7 @@ export class LoginPage {
   tryGoogleLogin() {
     this.authService.doGoogleLogin()
     .then(res => {
-      console.log(res);
+      // console.log(res);
       this.storage.set(this.HAS_LOGGED_IN, true);
       this.userData.setUsername(res.user.email);
       this.userData.events.publish('user:login');

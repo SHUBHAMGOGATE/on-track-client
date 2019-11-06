@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { FirebaseService } from '../firebase.service';
-
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,21 @@ export class UserData {
   _favorites: string[] = [];
   HAS_LOGGED_IN = 'hasLoggedIn';
   HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
-
+  refer :AngularFirestoreCollection;
   constructor(
     public events: Events,
     public storage: Storage,
-    public firebase:FirebaseService
-  ) { }
+    public fireserve:FirebaseService,
+    public afs : AngularFirestore
+  ) { 
+    
+  }
+ngOnInit(){
+  // if(this.storage.get(this.HAS_LOGGED_IN)){
+    console.log(this.getUsername());
+    this.getUserData();
+}
+  
 
   hasFavorite(sessionName: string): boolean {
     return (this._favorites.indexOf(sessionName) > -1);
@@ -34,12 +44,14 @@ export class UserData {
   }
 
   login(email: string,password: string): Promise<any> {
-    return this.firebase.doLogin(email,password)
+    return this.fireserve.doLogin(email,password)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.storage.set(this.HAS_LOGGED_IN, true);
           this.setUsername(email);
           this.events.publish('user:login');
+          this.getUserData();
+          
         }, err => {
         console.log(err);
         })
@@ -50,9 +62,9 @@ export class UserData {
   }
 
   signup(email: string,password:string): Promise<any> {
-    return this.firebase.doRegister(email,password)
+    return this.fireserve.doRegister(email,password)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.storage.set(this.HAS_LOGGED_IN, true);
           this.setUsername(email);
           this.events.publish('user:signup');
@@ -66,9 +78,9 @@ export class UserData {
   }
 
   logout(): Promise<any> {
-    return this.firebase.doLogout()
+    return this.fireserve.doLogout()
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.storage.remove(this.HAS_LOGGED_IN);
           this.events.publish('user:logout');
         }, err => {
@@ -102,4 +114,14 @@ export class UserData {
       return value;
     });
   }
+
+  getUserData(){
+    const email = this.getUsername();
+    this.refer = this.afs.collection('diet',ref => ref.where('email','==',email));
+  }
+  
+  public get userdata() : Observable<any> {
+    return this.refer.valueChanges();
+  }
+  
 }

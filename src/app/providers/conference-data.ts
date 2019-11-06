@@ -18,7 +18,7 @@ export class ConferenceData {
     if (this.data) {
       return of(this.data);
     } else {
-      return this.http.get('/assets/data/data.json')
+      return this.user.userdata
         .pipe(map(this.processData, this));
       // return this.firebase.loadSchedule()
       //   .pipe(map(this.processData, this));
@@ -29,7 +29,7 @@ export class ConferenceData {
     // just some good 'ol JS fun with objects and arrays
     // build up the data by linking speakers to sessions
     // console.log(data.user.schedule);
-    this.data = data.user;
+    this.data = data;
     // console.log(data.schedule)
 
     // loop through each day in the schedule

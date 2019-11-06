@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
 })
 export class FirebaseService {
 
-constructor(public afAuth: AngularFireAuth,public afStore:AngularFirestore){}
+constructor(public afAuth: AngularFireAuth,public afStore:AngularFirestore,){}
 doGoogleLogin(){
   return new Promise<any>((resolve, reject) => {
     let provider = new firebase.auth.GoogleAuthProvider();
